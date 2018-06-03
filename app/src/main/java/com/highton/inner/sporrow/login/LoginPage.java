@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.highton.inner.sporrow.R;
 import com.highton.inner.sporrow.RequestInterface;
 import com.highton.inner.sporrow.home.HomePage;
@@ -22,6 +24,7 @@ public class LoginPage extends AppCompatActivity {
 
     String str_email, str_pw;
     EditText email, pw;
+    ImageView iv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,8 @@ public class LoginPage extends AppCompatActivity {
     public void initView() {
         email = findViewById(R.id.et_loginID);
         pw = findViewById(R.id.et_loginPassword);
+        iv = findViewById(R.id.iv_logo1);
+        Glide.with(getApplicationContext()).load(R.drawable.app_logo).into(iv);
 
         findViewById(R.id.iv_btnLogin).setOnClickListener(new View.OnClickListener() {
             @Override

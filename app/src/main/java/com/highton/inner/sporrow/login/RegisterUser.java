@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.highton.inner.sporrow.R;
 import com.highton.inner.sporrow.RequestInterface;
 
@@ -21,6 +23,7 @@ public class RegisterUser extends AppCompatActivity {
 
     EditText email, password, chkpassword;
     String str_email, str_password, str_chkpassword;
+    ImageView iv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,8 @@ public class RegisterUser extends AppCompatActivity {
         email = findViewById(R.id.et_email);
         password = findViewById(R.id.et_password);
         chkpassword = findViewById(R.id.et_chkPassword);
+        iv = findViewById(R.id.iv_logo3);
+        Glide.with(getApplicationContext()).load(R.drawable.app_logo).into(iv);
 
         findViewById(R.id.iv_btnNext).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,10 +46,9 @@ public class RegisterUser extends AppCompatActivity {
                 str_password = password.getText().toString();
                 str_chkpassword = chkpassword.getText().toString();
 
-                if(str_password.equals(str_chkpassword)) {
+                if (str_password.equals(str_chkpassword)) {
                     doRegister(str_email, str_password);
-                }
-                else {
+                } else {
                     Toast.makeText(getApplicationContext(), "비밀번호를 다시 확인해 주세요!", Toast.LENGTH_LONG).show();
                 }
             }
@@ -63,7 +67,7 @@ public class RegisterUser extends AppCompatActivity {
         response.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                switch(response.code()) {
+                switch (response.code()) {
                     case 201: {
                         finish();
                         Intent intent = new Intent(RegisterUser.this, RegisterUserInfo.class);
